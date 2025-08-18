@@ -1,0 +1,20 @@
+name: Render deploy (Blueprint)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Zip repo
+        run: zip -r repo.zip . -x ".git/*"
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: repo
+          path: repo.zip
+    # Note: For Render, the recommended path is to connect the GitHub repo
+    # and let Render auto-deploy using render.yaml (Blueprint). This workflow
+    # just packages the repo; complete the setup in the Render dashboard.
