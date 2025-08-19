@@ -9,20 +9,36 @@ Este proyecto expone endpoints REST para consultar **People**, **Films**, **Star
 ## 🚀 Quickstart
 
 ```bash
-# 1) Requisitos
-# - Java 8
-# - Maven 3.6+ o Gradle 7+
+## 1) Requisitos
+- Java 8
+- Maven 3.6+ **o** Gradle 7+
 
-# 2) Variables de entorno (ejemplo)
-export SWAPI_BASE_URL=https://www.swapi.tech/api
+## 2) Probar (Swagger + JWT)
 
-# 3) Ejecutar
-mvn spring-boot:run
-# o
-./gradlew bootRun
+> Asegurate de tener la app corriendo en `http://localhost:8080`.
+> Si usás Maven: `mvn spring-boot:run`
 
-# 4) Probar
-curl -s "http://localhost:8080/api/people?page=1&limit=5&name=sky"
+1. Abrí **Swagger UI** en el navegador:  
+   `http://localhost:8080/swagger-ui/index.html#/`
+
+2. **Registrar usuario** en `POST /auth/register` con un body como:
+   ```json
+   {
+     "name": "Demo",
+     "password": "secret123"
+   }
+3. Usá la respuesta para loguearte en Swagger
+  En la respuesta de register/login vas a ver el token JWT. Copialo y, en Swagger, hacé click en Authorize (arriba a la derecha), pegá Bearer <tu_token>, y aceptá.
+  Desde ese momento, Swagger enviará el header Authorization: Bearer … en todas las llamadas.
+
+4. Probar los endpoints (desde Swagger):
+
+  GET /api/people con name para búsqueda por nombre.
+
+  GET /api/starships con id para búsqueda exacta.
+
+  GET /api/films/{id} para detalle.
+
 ```
 
 ---
